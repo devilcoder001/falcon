@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>To-Do List with Buttons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      padding: 50px;
+    }
+    #todo-container {
+      background: white;
+      padding: 20px 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
+      border-radius: 8px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    button.add-btn {
+      width: 100%;
+      padding: 10px;
+      background: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    button.add-btn:hover {
+      background: #218838;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      background: #fafafa;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li.completed span {
+      text-decoration: line-through;
+      color: #888;
+    }
+    .task-buttons {
+      display: flex;
+      gap: 5px;
+    }
+    .task-buttons button {
+      border: none;
+      padding: 5px 8px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .task-buttons .tick {
+      background: #28a745;
+      color: white;
+    }
+    .task-buttons .delete {
+      background: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="todo-container">
+    <h2>My To-Do List</h2>
+    <input type="text" id="todo-input" placeholder="Add a new task..." />
+    <button class="add-btn" onclick="addTodo()">Add</button>
+    <ul id="todo-list"></ul>
+  </div>
+
+  <script>
+    function addTodo() {
+      const input = document.getElementById('todo-input');
+      const todoText = input.value.trim();
+      if (todoText === '') {
+        alert('Please enter a task!');
+        return;
+      }
+
+      const ul = document.getElementById('todo-list');
+      const li = document.createElement('li');
+
+      const taskText = document.createElement('span');
+      taskText.textContent = todoText;
+
+      const buttonContainer = document.createElement('div');
+      buttonContainer.classList.add('task-buttons');
+
+      const tickBtn = document.createElement('button');
+      tickBtn.textContent = '✅';
+      tickBtn.classList.add('tick');
+      tickBtn.onclick = () => {
+        li.classList.toggle('completed');
+      };
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '🗑';
+      deleteBtn.classList.add('delete');
+      deleteBtn.onclick = () => {
+        ul.removeChild(li);
+      };
+
+      buttonContainer.appendChild(tickBtn);
+      buttonContainer.appendChild(deleteBtn);
+
+      li.appendChild(taskText);
+      li.appendChild(buttonContainer);
+
+      ul.appendChild(li);
+
+      input.value = '';
+      input.focus();
+    }
+  </script>
+</body>
+</html>

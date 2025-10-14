@@ -181,7 +181,7 @@ export default Welcome;`}</pre>
               <div className="hook-card">
                 <h4>useEffect</h4>
                 <p>Handle side effects</p>
-                <code>useEffect(() =&gt; {'{}'}, [deps])</code>
+                <code>useEffect(() {'=> {}'}, [deps])</code>
               </div>
               <div className="hook-card">
                 <h4>useContext</h4>
